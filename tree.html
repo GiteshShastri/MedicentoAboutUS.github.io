@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tree</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
+
+	<style type="text/css">
+		* {margin: 0; padding: 0;}
+		body{
+			font-family: 'Source Sans Pro', sans-serif;
+			font-family: 'Open Sans', sans-serif;
+		}
+		.tree ul {
+			padding-top: 20px; position: relative;
+			
+			transition: all 0.5s;
+			-webkit-transition: all 0.5s;
+			-moz-transition: all 0.5s;
+		}
+
+		.tree .li {
+			float: left; text-align: center;
+			list-style-type: none;
+			position: relative;
+			padding: 20px 5px 0 5px;
+			
+			transition: all 0.5s;
+			-webkit-transition: all 0.5s;
+			-moz-transition: all 0.5s;
+		}
+
+		/*We will use ::before and ::after to draw the connectors*/
+
+		.tree .li::before, .tree .li::after{
+			content: '';
+			position: absolute; top: 0; right: 50%;
+			border-top: 2px solid #ccc;
+			width: 50%; height: 20px;
+		}
+		.tree .li::after{
+			right: auto; left: 50%;
+			border-left: 2px solid #ccc;
+		}
+
+		/*We need to remove left-right connectors from elements without 
+		any siblings*/
+		.tree .li:only-child::after, .tree .li:only-child::before {
+			display: none;
+		}
+
+		/*Remove space from the top of single children*/
+		.tree .li:only-child{ padding-top: 0;}
+
+		/*Remove left connector from first child and 
+		right connector from last child*/
+		.tree .li:first-child::before, .tree .li:last-child::after{
+			border: 0 none;
+		}
+		/*Adding back the vertical connector to the last nodes*/
+		.tree .li:last-child::before{
+			border-right: 1px solid #ccc;
+			border-radius: 0 5px 0 0;
+			-webkit-border-radius: 0 5px 0 0;
+			-moz-border-radius: 0 5px 0 0;
+		}
+		.tree .li:first-child::after{
+			border-radius: 5px 0 0 0;
+			-webkit-border-radius: 5px 0 0 0;
+			-moz-border-radius: 5px 0 0 0;
+		}
+
+		/*Time to add downward connectors from parents*/
+		.tree ul ul::before{
+			content: '';
+			position: absolute; top: 0; left: 50%;
+			border-left: 2px solid #ccc;
+			width: 0; height: 20px;
+		}
+
+		.tree .li .a{
+			border: 1px solid #ccc;
+			/*padding: 5px 10px;*/
+			/*text-decoration: none;
+			color: #666;
+			font-family: arial, verdana, tahoma;
+			font-size: 11px;*/
+			display: inline-block;
+			border-radius: 5px;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			
+			transition: all 0.5s;
+			-webkit-transition: all 0.5s;
+			-moz-transition: all 0.5s;
+		}
+		.image{
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
+			border: 2px solid #778899;
+		}
+		ol{
+			list-style: none;
+		}
+		.pic{
+			float:left;
+			width:100px;
+			height:100px;
+			border-radius:50%; 
+			border: 1px solid #778899;
+		}
+		.text{
+			font-weight: normal;
+			float:left;
+			text-align: center;
+			padding:10px;
+		}
+		.a:hover{
+		}
+		div .a{
+			background-color: #F0F3F4;
+
+		}
+		div .a:hover{
+			background-color: #6ddabe;
+
+			cursor: pointer;
+
+
+		}
+		.text{
+			color:black;
+		}
+		.text:hover{
+			color: white;
+		}
+
+		/*Time for some hover effects*/
+		/*We will apply the hover effect the the lineage of the element also*/
+		/*.tree li .a:hover, .tree li .a:hover+ul li .a {
+			background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
+		}*/
+		
+
+		/*Connector styles on hover*/
+		/*.tree .li .a:hover+ul .li::after, 
+		.tree .li .a:hover+ul .li::before, 
+		.tree .li .a:hover+ul::before, 
+		.tree .li .a:hover+ul ul::before{
+			border-color:  #1AE6E3;
+		}*/
+		.effect:hover{
+			background-color: #6ddabe;
+			color: #fff;
+		}	
+		.tree{
+			margin-left: 14%;
+		}
+	</style>
+</head>
+<body>
+	<div class="tree">
+	<ul>
+		<li class="li">
+			<div class="a"><h3 class="buttonColor">Operation Team</h3></div>
+			<ul>
+				<li class="li">
+					<div class="a">
+						<!--<div class="main">
+							<table>
+								<tr>
+									<td class="pic"><img class="image" src="1(7).jpg" class="op"></td>
+									<td class="effect">
+										<ol class="list">
+											<li><h4>Rohit Shastri</h4></li>
+											<li><h5>Front End Developer</h5><hr></li>
+											<li><p>Maharaja Agrasen Institute of Technology(Delhi)</p></li>
+											<li><a href="#" class="fa fa-linkedin"></a></li>
+										</ol>
+									</td>
+								</tr>
+							</table>
+						</div>-->
+						<div>
+							<img src="1(7).jpg" class="pic">
+							<div class="text">
+								<h5>ROHIT SHASTRI</h5>
+								<p>Front End Developer</p>
+							</div>
+						</div>
+					</div>
+					
+					<ul>
+						<li class="li"><div class="a">
+							<div>
+								<img src="" class="pic">
+								<div class="text">
+									<h5>GURU SHANKAR</h5>
+									<p>UVCE - Banglore</p>
+								</div>
+							</div>
+						<!--<div class="main">
+							<table>
+								<tr>
+									<td class="pic"><img class="image" src="" class="op"></td>
+									<td class="effect">
+										<ol class="list">
+											<li><h4>Guru Shankar</h4></li>
+											<li><h5>Front End Developer</h5><hr></li>
+											<li><p>UVCE - Banglore</p></li>
+											<li><a href="#" class="fa fa-linkedin"></a></li>
+										</ol>
+									</td>
+								</tr>
+							</table>
+						</div>-->
+
+						</div>
+					</li>
+						<li class="li">
+							<div class="a">
+								<div>
+									<img src="" class="pic">
+									<div class="text">
+										<h5>KETAN YADAV</h5>
+										<p>BMS-IT Banglore</p>
+									</div>
+								</div>
+
+							<!--<div class="main">
+							<table>
+								<tr>
+									<td class="pic"><img class="image" src="" class="op"></td>
+									<td class="effect">
+										<ol class="list">
+											<li><h4>Ketan Yadav</h4></li>
+											<li><h5>Front End Developer</h5><hr></li>
+											<li><p>BMS-IT Banglore</p></li>
+											<li><a href="#" class="fa fa-linkedin"></a></li>
+										</ol>
+									</td>
+								</tr>
+							</table>
+						</div>-->
+						</div>
+						</li>
+						<li class="li">
+							<div class="a">
+								<div>
+									<img src="" class="pic">
+									<div class="text">
+										<h5>VINAY</h5>
+										<p>Delhi Technological University</p>
+									</div>
+								</div>
+
+							<!--<div class="main">
+							<table>
+								<tr>
+									<td class="pic"><img class="image" src="" class="op"></td>
+									<td class="effect">
+										<ol class="list">
+											<li><h4>vinay</h4></li>
+											<li><h5>Front End Developer</h5><hr></li>
+											<li><p>Delhi Technological University(DCE)</p></li>
+											<li><a href="#" class="fa fa-linkedin"></a></li>
+										</ol>
+									</td>
+								</tr>
+							</table>
+						</div>-->
+						</div></li>
+					</ul>
+				</li>
+			</ul>
+		</li>-->
+	</ul>
+</div>
+</body>
+</html>
